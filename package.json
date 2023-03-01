@@ -15,7 +15,7 @@
     "react-router-dom": "6.3.0"
   },
   "scripts": {
-    "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006 -s public",
+    "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook",
     "dev": "vite",
     "build": "vite build",
