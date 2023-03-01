@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "cross-env": "^6.0.3",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.3.1",
@@ -14,7 +15,7 @@
     "react-router-dom": "6.3.0"
   },
   "scripts": {
-    "storybook": "start-storybook -p 6006 -s public",
+    "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook",
     "dev": "vite",
     "build": "vite build",
