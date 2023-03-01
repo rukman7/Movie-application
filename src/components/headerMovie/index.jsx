@@ -5,6 +5,7 @@ import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import HomeIcon from "@mui/icons-material/Home";
+import FavouriteIcon from "@mui/icons-material/Favorite";
 
 const styles = {
     root: {  
@@ -18,6 +19,8 @@ const styles = {
 
 const MovieHeader = (props) => {
   const movie = props.movie;
+  const localFav = JSON.parse(localStorage.getItem("favourites"));
+  const isMovieFav = localFav.some((movie) => movie.id == movie.id);
 
   return (
     <Paper component="div" sx={styles.root}>
@@ -33,6 +36,13 @@ const MovieHeader = (props) => {
         <br />
         <span>{`${movie.tagline}`} </span>
       </Typography>
+
+      {isMovieFav ? (
+          <IconButton aria-label="is fav" sx={styles.avatar}>
+            <FavouriteIcon color="red" fontSize="large" />
+          </IconButton>
+      ) : null}
+
       <IconButton aria-label="go forward">
         <ArrowForwardIcon color="primary" fontSize="large" />
       </IconButton>
