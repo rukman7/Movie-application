@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
@@ -8,7 +8,9 @@ import MovieFilterUI, {
   titleFilter,
   genreFilter,
 } from "../components/movieFilterUI";
-import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
+import AddToFavouritesIcon from '../components/cardIcons/addToFavourites';
+import { MoviesContext } from "../contexts/moviesContext";
+
 
 const titleFiltering = {
   name: "title",
@@ -22,7 +24,14 @@ const genreFiltering = {
 };
 
 const HomePage = (props) => {
-  const { data, error, isLoading, isError } = useQuery("discover", getMovies);
+  const { pageMovies, setPageMovies } = useContext(MoviesContext);
+  const { isLoading, isError, error, data, isFetching } = useQuery(
+    ["discover", pageMovies],
+    () => getMovies(pageMovies),
+    {
+      keepPreviousData: true,
+    }
+  );
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],
     [titleFiltering, genreFiltering]
@@ -51,11 +60,13 @@ const HomePage = (props) => {
   return (
     <>
       <PageTemplate
-        title="Discover Movies"
+        title="Discover Movies" 
         movies={displayedMovies}
         action={(movie) => {
           return <AddToFavouritesIcon movie={movie} />
         }}
+        page={pageMovies}
+        pageSetter={setPageMovies}
       />
       <MovieFilterUI
         onFilterValuesChange={changeFilterValues}

@@ -73,4 +73,3 @@ const UpcomingMoviesPage = (props) => {
 };
 
 export default UpcomingMoviesPage;
-//changes already done to cache data for this page

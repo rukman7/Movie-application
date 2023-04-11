@@ -9,11 +9,11 @@ const styles = {
   }
 };
 
-function MovieListPageTemplate({ movies, title, action }) {
+function MovieListPageTemplate({ movies, title, action, page, pageSetter }) {
   return (
     <Grid container sx={styles.root}>
       <Grid item xs={12}>
-        <Header title={title} />
+        <Header title={title} page={page} pageSetter={pageSetter} />
       </Grid>
       <Grid item container spacing={5}>
       <MovieList action={action} movies={movies} />

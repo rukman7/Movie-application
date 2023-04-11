@@ -26,6 +26,11 @@ const styles = {
 export default function MovieCard({ movie, action }) {
   const { favourites, addToFavourites } = useContext(MoviesContext);
 
+  const openDetails = (e) => {
+    if (e.target instanceof SVGElement) return;
+    navigate(`/movies/${movie.id}`);
+  };
+
   if (favourites.find((id) => id === movie.id)) {
     movie.favourite = true;
   } else {
@@ -33,7 +38,8 @@ export default function MovieCard({ movie, action }) {
   }
 
   return (
-    <Card sx={styles.card}>
+    <Card sx={styles.card}
+    onClick={openDetails}>
           <CardHeader
       sx={styles.header}
       avatar={

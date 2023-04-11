@@ -1,6 +1,6 @@
-export const getMovies = () => {
+export const getMovies = (page) => { 
   return fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
+  `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`
   ).then((response) => {
     if (!response.ok) {
       throw new Error(response.json().message);
@@ -77,8 +77,8 @@ export const getMovie = (args) => {
       });
   };
   
-  export const getUpcomingMovies = (page) =>
-  fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`)
+  export const getUpcomingMovies = (page) => {
+  return fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`)
       .then((response) => {
           if (!response.ok) {
               throw new Error(response.json().message);
@@ -87,3 +87,4 @@ export const getMovie = (args) => {
       }).catch((error) => {
           throw error;
       });
+    }
