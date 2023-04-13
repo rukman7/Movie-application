@@ -9,7 +9,8 @@ import Typography from "@mui/material/Typography";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
-import MovieReviews from '../movieReviews'
+import MovieReviews from '../movieReviews';
+import RecommendedMovies from "../recommendedMovies";
 
 const styles = {
   chipSet: {
@@ -36,13 +37,15 @@ const MovieDetails = ( {movie}) => {
 
   return (
     <>
-      <Typography variant="h5" component="h3">
-        Overview
-      </Typography>
-
-      <Typography variant="h6" component="p">
-        {movie.overview}
-      </Typography>
+      <br />
+       <Paper>
+         <Typography variant="h6" component="h6" padding={2}>
+           Overview
+         </Typography>
+         <Typography variant="body2" component="p" padding={2}>
+           {movie.overview}
+         </Typography>
+       </Paper>
 
       <Paper component="ul" sx={styles.chipSet}>
         <li>
@@ -66,6 +69,12 @@ const MovieDetails = ( {movie}) => {
         />
         <Chip label={`Released: ${movie.release_date}`} />
       </Paper>
+      <Paper>
+      <Typography variant="h6" component="h6" padding={2}>
+        Recommended movies
+      </Typography>
+  <RecommendedMovies movie={movie} />
+</Paper>
       <Fab    
         color="secondary"
         variant="extended"
