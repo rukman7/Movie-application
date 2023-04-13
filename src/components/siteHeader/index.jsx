@@ -59,7 +59,7 @@ const SiteHeader = () => {
             Movie Info
           </Typography>
           <Typography variant="h6" sx={styles.title}>
-            All you ever wanted to know about Movies!
+          High-quality films for you
           </Typography>
           {isMobile ? (
             <>
