@@ -8,7 +8,8 @@ import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, { titleFilter } from "../components/movieFilterUI";
 import RemoveFromFavourites from "../components/cardIcons/removeFromFavourites";
 import WriteReview from "../components/cardIcons/writeReview";
-
+import { useEffect, useState } from "react";
+import { applySortValues } from "../util";
 
 const titleFiltering = {
   name: "title",
@@ -28,6 +29,7 @@ export const genreFiltering = {
 };
 
 const FavouriteMoviesPage = () => {
+  const [sortValue, setSortValue] = useState("title_ASC");
   const { favourites: movieIds } = useContext(MoviesContext);
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],
@@ -55,6 +57,10 @@ const FavouriteMoviesPage = () => {
     ? filterFunction(allFavourites)
     : [];
 
+  const displayedMovies = applySortValues(
+    sortValue,
+    filterFunction(allFavourites)
+  );
   const toDo = () => true;
 
   const changeFilterValues = (type, value) => {
@@ -70,7 +76,7 @@ const FavouriteMoviesPage = () => {
     <>
       <PageTemplate
         title="Favourite Movies"
-        movies={displayMovies}
+        movies={displayedMovies}
         action={(movie) => {
           return (
             <>
@@ -84,6 +90,8 @@ const FavouriteMoviesPage = () => {
         onFilterValuesChange={changeFilterValues}
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
+        onSortValuesChange={setSortValue}
+        currentSort={sortValue}
       />
     </>
   );

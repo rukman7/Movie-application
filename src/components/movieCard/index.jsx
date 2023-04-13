@@ -14,6 +14,7 @@ import Grid from "@mui/material/Grid";
 import img from '../../images/film-poster-placeholder.png'
 import Avatar from "@mui/material/Avatar";
 import { MoviesContext } from "../../contexts/moviesContext";
+import { toReadableDate } from "../../util";
 
 const styles = {
   card: { maxWidth: 345 },
@@ -36,6 +37,8 @@ export default function MovieCard({ movie, action }) {
   } else {
     movie.favourite = false
   }
+
+  movie.release_date_full = toReadableDate(movie.release_date);
 
   return (
     <Card sx={styles.card}
@@ -68,7 +71,7 @@ export default function MovieCard({ movie, action }) {
           <Grid item xs={6}>
             <Typography variant="h6" component="p">
               <CalendarIcon fontSize="small" />
-              {movie.release_date}
+              {movie.release_date_full}
             </Typography>
           </Grid>
           <Grid item xs={6}>

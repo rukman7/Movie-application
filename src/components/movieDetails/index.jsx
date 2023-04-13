@@ -12,6 +12,8 @@ import Drawer from "@mui/material/Drawer";
 import MovieReviews from '../movieReviews';
 import RecommendedMovies from "../recommendedMovies";
 import MovieCastList from "../movieCast";
+import { toReadableLanguage } from "../../util";
+ import { LanguageOutlined } from "@mui/icons-material";
 
 const styles = {
   chipSet: {
@@ -69,6 +71,11 @@ const MovieDetails = ( {movie}) => {
           label={`${movie.vote_average} (${movie.vote_count}`}
         />
         <Chip label={`Released: ${movie.release_date}`} />
+        <Chip
+           icon={<LanguageOutlined />}
+           label={toReadableLanguage(movie.original_language)}
+           sx={styles.chipLabel}
+         />
       </Paper>
       <Paper>
          <Typography variant="h6" component="h6" padding={2}>

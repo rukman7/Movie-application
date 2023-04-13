@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
@@ -7,9 +7,11 @@ import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
+  langFilter,
 } from "../components/movieFilterUI";
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites';
 import { MoviesContext } from "../contexts/moviesContext";
+import { applySortValues, applyFilterValues } from "../util";
 
 
 const titleFiltering = {
@@ -23,8 +25,15 @@ const genreFiltering = {
   condition: genreFilter,
 };
 
+const langFiltering = {
+  name: "language",
+  value: "0",
+  condition: langFilter,
+};
+
 const HomePage = (props) => {
   const { pageMovies, setPageMovies } = useContext(MoviesContext);
+  const [sortValue, setSortValue] = useState("title_ASC");
   const { isLoading, isError, error, data, isFetching } = useQuery(
     ["discover", pageMovies],
     () => getMovies(pageMovies),
@@ -34,7 +43,7 @@ const HomePage = (props) => {
   );
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],
-    [titleFiltering, genreFiltering]
+    [titleFiltering, genreFiltering, langFiltering]
   );
 
   if (isLoading) {
@@ -54,8 +63,12 @@ const HomePage = (props) => {
     setFilterValues(updatedFilterSet);
   };
 
+  const handleChangeFilterValues = (...args) =>
+  applyFilterValues(filterValues, setFilterValues, ...args);
+
   const movies = data ? data.results : [];
-  const displayedMovies = filterFunction(movies);
+
+  const displayedMovies = applySortValues(sortValue, filterFunction(movies));
 
   return (
     <>
@@ -69,9 +82,12 @@ const HomePage = (props) => {
         pageSetter={setPageMovies}
       />
       <MovieFilterUI
-        onFilterValuesChange={changeFilterValues}
+        onFilterValuesChange={handleChangeFilterValues}
+        onSortValuesChange={setSortValue}
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
+        langFilter={filterValues[2].value}
+        currentSort={sortValue}
       />
     </>
   );

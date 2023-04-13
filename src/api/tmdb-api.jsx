@@ -98,3 +98,15 @@ export const getMovieCast = (id) =>
   fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${import.meta.env.VITE_TMDB_KEY}`)
     .then((res) => res.json())
     .then((json) => json.cast);
+
+export const getLanguages = () =>
+  fetch(`https://api.themoviedb.org/3/configuration/languages?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US`)
+    .then(async (response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      const languages = await response.json();
+      return languages.sort((a, b) => a.english_name.localeCompare(b.english_name));
+    }).catch((error) => {
+      throw error
+    });
