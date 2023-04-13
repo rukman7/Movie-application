@@ -1,6 +1,7 @@
 import SiteHeader from './components/siteHeader'
 import MovieReviewPage from "./pages/movieReviewPage";
 import React from "react";
+import { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Navigate, Routes, Link } from "react-router-dom";
 import HomePage from "./pages/homePage";
@@ -11,36 +12,53 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools';
 import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage'
+import { supabase } from "./api/supabaseClient";
+import Auth from "./auth/Auth";
+import Account from "./auth/Account";
 
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 360000,
-      refetchInterval: 360000, 
+      refetchInterval: 360000,
       refetchOnWindowFocus: false
     },
   },
 });
 
 const App = () => {
-  return (
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    supabase.auth
+      .getSession()
+      .then(({ data: { session } }) => setSession(session));
+    supabase.auth.onAuthStateChange((_event, session) => setSession(session));
+  }, []);
+
+
+  return !session ? (<Auth />) : (
     <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-    <SiteHeader />      {/* New Header  */}
-    <MoviesContextProvider>
-      <Routes>
-        <Route path="/reviews/form" element={<AddMovieReviewPage/>} />
-        <Route path="/reviews/:id" element={<MovieReviewPage/>} />
-        <Route path="/movies/favourites" element={<FavouriteMoviesPage />} />
-        <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
-        <Route path="/movies/:id" element={<MoviePage />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-      </MoviesContextProvider>
-    </BrowserRouter>
-    <ReactQueryDevtools initialIsOpen={false} />
+      <BrowserRouter>
+        <SiteHeader />      {/* New Header  */}
+        <MoviesContextProvider>
+          <Routes>
+            <Route path="/reviews/form" element={<AddMovieReviewPage />} />
+            <Route path="/reviews/:id" element={<MovieReviewPage />} />
+            <Route path="/movies/favourites" element={<FavouriteMoviesPage />} />
+            <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
+            <Route path="/movies/:id" element={<MoviePage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="*" element={<Navigate to="/" />} />
+            <Route
+              path="/account"
+              element={<Account key={session.user.id} session={session} />}
+            />
+          </Routes>
+        </MoviesContextProvider>
+      </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 };
