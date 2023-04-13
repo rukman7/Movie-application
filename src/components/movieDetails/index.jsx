@@ -11,6 +11,7 @@ import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from '../movieReviews';
 import RecommendedMovies from "../recommendedMovies";
+import MovieCastList from "../movieCast";
 
 const styles = {
   chipSet: {
@@ -69,6 +70,12 @@ const MovieDetails = ( {movie}) => {
         />
         <Chip label={`Released: ${movie.release_date}`} />
       </Paper>
+      <Paper>
+         <Typography variant="h6" component="h6" padding={2}>
+           Cast
+         </Typography>
+         <MovieCastList movie={movie} />
+       </Paper>
       <Paper>
       <Typography variant="h6" component="h6" padding={2}>
         Recommended movies
