@@ -39,7 +39,7 @@ const SiteHeader = () => {
   const menuOptions = [
     { label: "Home", path: "/" },
     { label: "Favorites", path: "/movies/favourites" },
-    { label: "Upcoming movies", path: "/movies/upcoming"},
+    { label: "Upcoming movies", path: "/movies/upcoming" },
     { label: "Account", path: "/account" },
   ];
 
@@ -63,6 +63,10 @@ const SiteHeader = () => {
           </Typography>
           {isMobile ? (
             <>
+              {theme.palette.mode} mode
+              <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+                {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+              </IconButton>
               <IconButton
                 aria-label="menu"
                 aria-controls="menu-appbar"
@@ -100,10 +104,10 @@ const SiteHeader = () => {
             </>
           ) : (
             <>
-                    {theme.palette.mode} mode
-      <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
-        {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-      </IconButton>
+              {theme.palette.mode} mode
+              <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+                {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+              </IconButton>
               {menuOptions.map((opt) => (
                 <Button
                   key={opt.label}
