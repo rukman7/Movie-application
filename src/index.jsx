@@ -15,11 +15,10 @@ import AddMovieReviewPage from './pages/addMovieReviewPage'
 import { supabase } from "./api/supabaseClient";
 import Auth from "./auth/Auth";
 import Account from "./auth/Account";
+import ColorModeContext from './contexts/themeContext'
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-
-export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -69,7 +68,7 @@ const App = () => {
       <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <SiteHeader />      {/* New Header  */}
+        <SiteHeader />
         <MoviesContextProvider>
           <Routes>
             <Route path="/reviews/form" element={<AddMovieReviewPage />} />
