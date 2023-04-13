@@ -16,6 +16,10 @@ import { supabase } from "./api/supabaseClient";
 import Auth from "./auth/Auth";
 import Account from "./auth/Account";
 
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,6 +34,27 @@ const queryClient = new QueryClient({
 const App = () => {
   const [session, setSession] = useState(null);
 
+  const [mode, setMode] = useState('light');
+
+  const colorMode = React.useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+      },
+    }),
+    [],
+  );
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+    [mode],
+  );
+
   useEffect(() => {
     supabase.auth
       .getSession()
@@ -41,6 +66,9 @@ const App = () => {
   return !session ? (<Auth />) : (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+      <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
         <SiteHeader />      {/* New Header  */}
         <MoviesContextProvider>
           <Routes>
@@ -57,6 +85,8 @@ const App = () => {
             />
           </Routes>
         </MoviesContextProvider>
+        </ThemeProvider>
+        </ColorModeContext.Provider>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
