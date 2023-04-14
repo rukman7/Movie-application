@@ -19,7 +19,7 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook",
     "dev": "vite",
-    "build": "CI=false react-scripts build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "eslintConfig": {
