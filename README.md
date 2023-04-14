@@ -2,8 +2,6 @@
 
 **Name:** Rukmangathan Annadurai
 
-Demo: movie-application-tau.vercel.app
-
 ## Overview 
 
 > This project is a SPA front-end React application. You can use it to discover the latest movies and get more information on them. If you have a [TMDb](https://www.themoviedb.org/) account, you can login with that account in this app to rate movies, add them to your favorites list.
