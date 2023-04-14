@@ -84,6 +84,14 @@ It uses:
 > This page shows reviews of a movie
 
 <p align="center">
+  <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image4.png">
+</p>
+
+#### Write reviews
+
+> A review form that can be used to write reviews
+
+<p align="center">
   <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image14.png">
 </p>
 
@@ -140,6 +148,14 @@ It uses:
 
 <p align="center">
   <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image11.png">
+</p>
+
+#### Storybook
+
+> Used for component development
+
+<p align="center">
+  <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image15.png">
 </p>
 
 
