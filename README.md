@@ -38,11 +38,14 @@ It uses:
 
 ## Feature Design
 
-#### The Upcoming Movies feature.
+#### The Login Page
 
-> Lists movies from the Upcoming movies endpoint of TMDB
+> Requires an email address
 
-![][image6]
+<p align="center">
+  <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image6.png">
+</p>
+
 
 
 ## Authentication
