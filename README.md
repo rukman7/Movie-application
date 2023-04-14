@@ -1,6 +1,10 @@
-# Movie Tracker
+# Enterprise Web Development - Assignment 1
+
+**Name:** Rukmangathan Annadurai
 
 Demo: movie-application-tau.vercel.app
+
+## Overview 
 
 > This project is a SPA front-end React application. You can use it to discover the latest movies and get more information on them. If you have a [TMDb](https://www.themoviedb.org/) account, you can login with that account in this app to rate movies, add them to your favorites list.
 
@@ -16,13 +20,12 @@ It uses:
 - **Storybook**: for documenting and developing React components
 - **Reactquery**: for caching API calls
 
-## Features
+# Features
 
 - [x] View upcoming movies
 - [x] View current movies
 - [x] Pagenation
 - [x] View cast details
-- [x] View actor information
 - [x] View and write reviews
 - [x] Add movie to favourites list
 - [x] Search movies
@@ -32,6 +35,31 @@ It uses:
 - [x] Authentication using supabase
 - [x] Switch between dark and light theme
 - [x] Show similar movies based on the movie being viewed
+
+## Feature Design
+
+#### The Upcoming Movies feature.
+
+> Lists movies from the Upcoming movies endpoint of TMDB
+
+![][image6]
+
+
+## Authentication
+
+| Route  | info |
+| ------------- | ------------- |
+| /  | Paginated list of movies for the landing page |
+| /movies/:id  | Expands to information above a chosen movie  |
+| /movies/upcoming | Paginated list of Upcoming movies|
+| /account | Logged in User's information |
+| /movies/favourites | List of users favourite movies |
+| /reviews/:id | Review of a movie| 
+| /reviews/form | Page to write a review | 
+
+#### Protected features
+
+All the endpoints are protected which means that only logged in users will be able to access the above mentioned endpoints.
 
 ## Installation
 
