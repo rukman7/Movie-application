@@ -19,9 +19,6 @@ const styles = {
 
 const MovieHeader = (props) => {
   const movie = props.movie;
-  if(localStorage.getItem("favourites") === null){
-    localStorage.setItem("favourites", "none") 
-  }
   const localFav = JSON.parse(localStorage.getItem("favourites"));
   const isMovieFav = localFav.some((movie) => movie.id == movie.id);
 
