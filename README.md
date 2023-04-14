@@ -38,7 +38,7 @@ It uses:
 
 ## Feature Design
 
-#### The Login Page
+#### Login Page
 
 > Requires an email address
 
@@ -46,6 +46,101 @@ It uses:
   <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image6.png">
 </p>
 
+#### Landing page
+
+> Shows a paginated list of popular movies from the TMDB endpoint
+
+<p align="center">
+  <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image2.png">
+</p>
+
+#### Upcoming movies page   
+
+> Shows a paginated list of upcoming movies from the TMDB endpoint
+
+<p align="center">
+  <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image6.png">
+</p>
+
+#### Movie information and cast details
+
+> Clicking on a movie card leads to this page
+
+<p align="center">
+  <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image3.png">
+</p>
+
+
+#### Similar movies
+
+> Shows a list of similar movies based on the current movie selected
+
+<p align="center">
+  <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image13.png">
+</p>
+
+#### Movie reviews
+
+> This page shows reviews of a movie
+
+<p align="center">
+  <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image14.png">
+</p>
+
+#### Favourite movies page
+
+> Shows the movies that are marked as favourite
+
+<p align="center">
+  <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image5.png">
+</p>
+
+#### Filtering and sorting
+
+> Allows to filter and sort movies based on a criteria
+
+<p align="center">
+  <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image8.png">
+</p>
+
+
+#### Dark mode
+
+> Applies dark theme to all the pages. Image shows dark theme on the landing page
+
+<p align="center">
+  <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image7.png">
+</p>
+
+#### Account settings
+
+> Show accounts page where the user can update profile details
+
+<p align="center">
+  <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image12.png">
+</p>
+
+#### Supabase 
+
+> This supabase page shows graphs about request to authentication, storage and datbase
+
+<p align="center">
+  <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image9.png">
+</p>
+
+> Profiles
+
+<p align="center">
+  <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image10.png">
+</p>
+
+#### Vercel production deployment
+
+> This page provides information about the recent production deployment, branch, preview and page url
+
+<p align="center">
+  <img width="800" alt="image" src="https://github.com/rukman7/Movie-application/blob/master/images/image11.png">
+</p>
 
 
 ## Authentication
