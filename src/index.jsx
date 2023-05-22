@@ -19,6 +19,7 @@ import ColorModeContext from './contexts/themeContext'
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { getToken, setToken, setUser } from "./api/authApiExpress";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,7 +32,7 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  const [session, setSession] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(Boolean(getToken()));
 
   const [mode, setMode] = useState('light');
 
@@ -54,15 +55,16 @@ const App = () => {
     [mode],
   );
 
-  useEffect(() => {
-    supabase.auth
-      .getSession()
-      .then(({ data: { session } }) => setSession(session));
-    supabase.auth.onAuthStateChange((_event, session) => setSession(session));
-  }, []);
+  const setDefaultHeaders = ({ token, user }) => {
+    setToken(token);
+    setUser(user);
+    setLoggedIn(true);
+  };
 
 
-  return !session ? (<Auth />) : (
+  return !loggedIn ? (
+    <Auth setDefaultHeaders={setDefaultHeaders} />
+  ) : (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
       <ColorModeContext.Provider value={colorMode}>
@@ -78,10 +80,7 @@ const App = () => {
             <Route path="/movies/:id" element={<MoviePage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<Navigate to="/" />} />
-            <Route
-              path="/account"
-              element={<Account key={session.user.id} session={session} />}
-            />
+            <Route path="/account" element={<Account />} />
           </Routes>
         </MoviesContextProvider>
         </ThemeProvider>

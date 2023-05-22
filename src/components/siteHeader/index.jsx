@@ -40,7 +40,7 @@ const SiteHeader = () => {
     { label: "Home", path: "/" },
     { label: "Favorites", path: "/movies/favourites" },
     { label: "Upcoming movies", path: "/movies/upcoming" },
-    { label: "Account", path: "/account" },
+    { label: "Logout", path: "/" },
   ];
 
   const handleMenuSelect = (pageURL) => {

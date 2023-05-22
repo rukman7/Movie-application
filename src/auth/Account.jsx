@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
- import { supabase } from "../api/supabaseClient";
+//  import { supabase } from "../api/supabaseClient";
  import { Button, Grid, TextField } from "@mui/material";
- import Avatar from "./Avatar";
- import { useNavigate } from "react-router-dom";
+//  import Avatar from "./Avatar";
+//  import { useNavigate } from "react-router-dom";
+import { getUser, logOutUser, updateUser } from "../api/authApiExpress";
 
  const styles = {
    container: {
@@ -12,104 +13,55 @@ import { useState, useEffect } from "react";
    },
  };
 
- export default function Account({ session }) {
-   const navigate = useNavigate();
-   const [loading, setLoading] = useState(true);
-   const [username, setUsername] = useState(null);
-   const [website, setWebsite] = useState(null);
-   const [avatar_url, setAvatarUrl] = useState(null);
-
-   useEffect(() => {
-     async function getProfile() {
-       setLoading(true);
-       const { user } = session;
-
-       let { data, error } = await supabase
-         .from("profiles")
-         .select(`username, website, avatar_url`)
-         .eq("id", user.id)
-         .single();
-
-       if (error) {
-         console.warn(error);
-       } else if (data) {
-         setUsername(data.username);
-         setWebsite(data.website);
-         setAvatarUrl(data.avatar_url);
-       }
-
-       setLoading(false);
-     }
-
-     getProfile();
-   }, [session]);
+ export default function Account() {
+  const user = getUser();
+  const [loading, setLoading] = useState(false);
+  const [firstName, setFirstName] = useState(user.firstName);
+  const [lastName, setLastName] = useState(user.lastName);
 
    async function updateProfile(event) {
      event.preventDefault();
 
      setLoading(true);
-     const { user } = session;
-
-     const updates = {
-       id: user.id,
-       username,
-       website,
-       avatar_url,
-       updated_at: new Date(),
-     };
-
-     let { error } = await supabase.from("profiles").upsert(updates);
-
-     if (error) {
-       alert(error.message);
-     }
+     await updateUser({ firstName, lastName });
      setLoading(false);
    }
 
    const onLogout = async () => {
-     await supabase.auth.signOut();
-     navigate("/");
+    logOutUser();
+    window.location.reload();
    };
 
    return (
      <form onSubmit={updateProfile}>
        <Grid container spacing={3} sx={styles.container}>
-         <Grid item>
-           <Avatar
-             url={avatar_url}
-             size={200}
-             onUpload={(url) => {
-               setAvatarUrl(url);
-             }}
-           />
-         </Grid>
          <Grid item width={500}>
            <TextField
              fullWidth
              id="email"
              label="Email"
              disabled
-             value={session.user.email}
+             value={user.email}
            />
          </Grid>
          <Grid item width={500}>
            <TextField
              fullWidth
-             id="username"
-             label="Name"
+             id="firstName"
+             label="First Name"
              required
-             value={username || ""}
-             onChange={(e) => setUsername(e.target.value)}
+             value={firstName || ""}
+             onChange={(e) => setFirstName(e.target.value)}
            />
          </Grid>
          <Grid item width={500}>
            <TextField
              fullWidth
-             id="website"
-             label="Website"
-             type="website"
-             value={website || ""}
-             onChange={(e) => setWebsite(e.target.value)}
+             id="lastName"
+             label="Last Name"
+             required
+             value={lastName || ""}
+             onChange={(e) => setLastName(e.target.value)}
            />
          </Grid>
          <Grid item>

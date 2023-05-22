@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
-import { getUpcomingMovies } from "../api/tmdb-api";
+import { getUpcomingMovies } from "../api/dataApiExpress";
 import { MoviesContext } from "../contexts/moviesContext";
 import { applySortValues } from "../util";
 import useFiltering from "../hooks/useFiltering";

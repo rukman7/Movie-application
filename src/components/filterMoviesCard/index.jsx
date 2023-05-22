@@ -11,7 +11,8 @@ import SortIcon from "@mui/icons-material/Sort";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-import { getGenres, getLanguages } from "../../api/tmdb-api";
+import { getGenres } from "../../api/tmdb-api";
+import { getLanguages } from "../../api/dataApiExpress";
 
 const styles = {
   root: {

@@ -1,4 +1,5 @@
 import truncate from "lodash/truncate";
+import { getToken } from "./api/authApiExpress";
 
 export function applyFilterValues(prevValues, setter, type, value) {
   const changedFilter = { name: type, value: value };
@@ -42,4 +43,16 @@ export function excerpt(string) {
     length: 400, // maximum 400 characters
     separator: /,?\.* +/, // separate by spaces, including preceding commas and periods
   });
+}
+
+export function updateOptions(options) {
+  const update = { ...options };
+  const token = getToken();
+  if (token) {
+      update.headers = {
+          ...update.headers,
+          Authorization: token,
+      };
+  }
+  return update;
 }

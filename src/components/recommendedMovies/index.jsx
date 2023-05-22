@@ -5,7 +5,7 @@ import React from "react";
  import Spinner from "../spinner";
  import AddToFavouritesIcon from "../cardIcons/addToFavourites";
 
- import { getRecommendedMovies } from "../../api/tmdb-api";
+ import { getRecommendedMovies } from "../../api/dataApiExpress";
 
  const styles = {
    container: {
